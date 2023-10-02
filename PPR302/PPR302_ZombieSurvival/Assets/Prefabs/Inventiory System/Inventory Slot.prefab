@@ -114,3 +114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696e57d0afe38474396bf805bf868759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 2931391812510879944}
+  selectedColour: {r: 1, g: 0.5235849, b: 0.5235849, a: 1}
+  notSelectedColour: {r: 1, g: 1, b: 1, a: 1}
