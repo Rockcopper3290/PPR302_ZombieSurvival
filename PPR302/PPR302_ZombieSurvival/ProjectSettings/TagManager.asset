@@ -11,11 +11,11 @@ TagManager:
   - 
   - Water
   - UI
+  - whatIsPlayer
+  - whatIsZombie
   - 
-  - 
-  - 
-  - 
-  - 
+  - whatIsWall
+  - whatIsGround
   - 
   - 
   - 
