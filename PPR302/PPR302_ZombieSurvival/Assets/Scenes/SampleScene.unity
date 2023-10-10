@@ -370,7 +370,6 @@ MonoBehaviour:
   inventoryManager: {fileID: 1181772724}
   itemsToPickUp:
   - {fileID: 11400000, guid: 4350da6bc29e5404e9f4a25a82a151ee, type: 2}
-  - {fileID: 11400000, guid: 5b6f8a65dd01d5b4d867ce8462a6609f, type: 2}
   - {fileID: 11400000, guid: a2249ce39ab676f418e7c36f5fb1ecc3, type: 2}
 --- !u!224 &237109280 stripped
 RectTransform:
@@ -2337,7 +2336,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2393,7 +2392,6 @@ GameObject:
   - component: {fileID: 852702160}
   - component: {fileID: 852702161}
   - component: {fileID: 852702162}
-  - component: {fileID: 852702163}
   m_Layer: 0
   m_Name: Player Folder
   m_TagString: Player
@@ -2477,7 +2475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainInventory: {fileID: 1797086575}
-  Crosshair: {fileID: 0}
+  Crosshair: {fileID: 1505668023}
 --- !u!114 &852702162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2503,20 +2501,6 @@ MonoBehaviour:
   currentFood: 0
   maxWater: 100
   currentWater: 0
---- !u!114 &852702163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 852702157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b92cd386e511854eb4ba9ab33f65691, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryManager: {fileID: 1181772724}
-  itemsToPickUp: []
 --- !u!114 &865164984 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5245103079779676474, guid: 1e6e27a342b4a7f459bd3c97b2d200b3, type: 3}
@@ -3399,6 +3383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b28ff4f0a186d8949a54772ae6d63bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStats: {fileID: 852702162}
   maxStackedItems: 0
   inventorySlots:
   - {fileID: 2141037293}
@@ -3741,12 +3726,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 198680551}
         m_TargetAssemblyTypeName: DemoScript, Assembly-CSharp
-        m_MethodName: GetSelectedItem
-        m_Mode: 1
+        m_MethodName: PickupItem
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

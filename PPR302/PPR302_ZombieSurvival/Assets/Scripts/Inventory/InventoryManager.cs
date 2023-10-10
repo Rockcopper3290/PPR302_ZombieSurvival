@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public PlayerStats playerStats;
+
     public int maxStackedItems = 4;
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
-    
+
 
     int selectedSlot = -1;
 
@@ -127,19 +129,27 @@ public class InventoryManager : MonoBehaviour
                 {
                     Destroy(itemInSlot.gameObject);
                     Debug.Log("USED LAST OF ITEM");
+
+                    if (item.type == ItemType.Food)
+                        playerStats.AddToPlayerStats_Food(item.restoreValue);
+                    else if (item.type == ItemType.Water)
+                        playerStats.AddToPlayerStats_Water(item.restoreValue);
                 }
                 else
                 {
                     itemInSlot.RefreshCount();
                     Debug.Log("USED ITEM");
-                }
+
+                    if (item.type == ItemType.Food)
+                        playerStats.AddToPlayerStats_Food(item.restoreValue);
+                    else if (item.type == ItemType.Water)
+                        playerStats.AddToPlayerStats_Water(item.restoreValue);
+                }           
             }
             else
             {
                 Debug.Log("Item in slot is not consumeable");
             }
-
-
 
         }
         else

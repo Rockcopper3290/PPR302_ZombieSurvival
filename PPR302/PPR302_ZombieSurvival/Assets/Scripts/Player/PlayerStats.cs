@@ -26,10 +26,12 @@ public class PlayerStats : MonoBehaviour
 
 
     public float maxFood = 100f;
+    private Coroutine LoseFoodOverTime_CR;
     [HideInInspector] public float currentFood;
     [HideInInspector] private float foodUsagePerSecond = 1f;
 
     public float maxWater = 100f;
+    private Coroutine LoseWaterOverTime_CR;
     [HideInInspector] public float currentWater;
     [HideInInspector] private float waterUsagePerSecond = 1f;
 
@@ -59,6 +61,10 @@ public class PlayerStats : MonoBehaviour
         waterBar.maxValue = maxWater;
         waterBar.value = maxWater;
 
+        LoseFoodOverTime_CR = StartCoroutine(LoseFoodOverTime());
+        LoseWaterOverTime_CR = StartCoroutine(LoseWaterOverTime());
+
+
         //SetSliderValues(this.currentStamina, this.maxStamina, staminaBar);
     }
 
@@ -71,7 +77,41 @@ public class PlayerStats : MonoBehaviour
     }
 
 
-    // 
+    public void AddToPlayerStats_Food(float restoreAmount)
+    {
+        
+
+        currentFood += restoreAmount;
+
+        if (currentFood > maxFood)
+            currentFood = maxFood;
+
+        foodBar.value = currentFood;
+
+        // if not null it means that were are already regaining staminia -> stop the current staminia regen and wait 2 seconds
+        if (LoseFoodOverTime_CR != null)
+            StopCoroutine(LoseFoodOverTime());
+
+        LoseFoodOverTime_CR = StartCoroutine(LoseFoodOverTime());
+    }
+
+    public void AddToPlayerStats_Water(float restoreAmount)
+    {
+        currentWater += restoreAmount;
+
+        if (currentWater > 100f)
+            currentWater = 100f;
+
+        foodBar.value = currentFood;
+
+        // if not null it means that were are already regaining staminia -> stop the current staminia regen and wait 2 seconds
+        if (LoseWaterOverTime_CR != null)
+            StopCoroutine(LoseWaterOverTime());
+
+        LoseWaterOverTime_CR = StartCoroutine(LoseWaterOverTime());
+    }
+
+
     public void UseStamina_Jumping(float amount)
     {
         if (currentStamina - amount >= 0)
@@ -101,8 +141,11 @@ public class PlayerStats : MonoBehaviour
             staminaBar.value = currentStamina;
 
             // if not null it means that were are already regaining staminia -> stop the current staminia regen and wait 2 seconds
-            if (Regen_Staminia != null)
-                StopCoroutine(Regen_Staminia);
+            if (Regen_Staminia != null) 
+            { 
+            StopCoroutine(Regen_Staminia);
+            //StopCoroutine(LoseFoodOverTime_CR); 
+            }
 
             Regen_Staminia = StartCoroutine(RegainStaminia());
         }
@@ -125,6 +168,36 @@ public class PlayerStats : MonoBehaviour
             yield return regenTick;
         }
         Regen_Staminia = null;
+    }
+
+    private IEnumerator LoseFoodOverTime()
+    {
+        yield return new WaitForSeconds(2f);
+
+        //while player is walking and has food stores
+        while (currentFood > 0f) //&& playerMovement.state == PlayerMovement.MovementState.walking
+        {
+            
+            currentFood -= 5f * Time.deltaTime;
+            foodBar.value = currentFood;
+            yield return regenTick;
+        }
+        LoseFoodOverTime_CR = null;
+    }
+
+    private IEnumerator LoseWaterOverTime()
+    {
+        yield return new WaitForSeconds(2f);
+
+        //while player is walking and has food stores
+        while (currentWater > 0f)
+        {
+
+            currentWater -= 5f * Time.deltaTime;
+            waterBar.value = currentWater;
+            yield return regenTick;
+        }
+        LoseWaterOverTime_CR = null;
     }
 
 }
