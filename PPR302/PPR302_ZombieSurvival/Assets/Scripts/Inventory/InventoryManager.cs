@@ -7,6 +7,7 @@ public class InventoryManager : MonoBehaviour
     public int maxStackedItems = 4;
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
+    
 
     int selectedSlot = -1;
 
@@ -25,6 +26,11 @@ public class InventoryManager : MonoBehaviour
             if (isNumber && number > 0 && number < 8){
                 ChangeSelectedSlot(number - 1);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            UseSelectedItem();
         }
     }
 
@@ -100,6 +106,47 @@ public class InventoryManager : MonoBehaviour
 
             return item;
         }
+
+        return null;
+    }
+
+    public Item UseSelectedItem()
+    {
+        InventorySlot slot = inventorySlots[selectedSlot];
+        DraggableItem itemInSlot = slot.GetComponentInChildren<DraggableItem>();
+        if (itemInSlot != null)
+        {
+            Item item = itemInSlot.item;
+
+            //checks to see if the current selected item is consumeable
+            if (item.actionType == ActionType.Consumable)
+            {
+                Debug.Log("Item is consumeable");
+                itemInSlot.count--;
+                if (itemInSlot.count <= 0)
+                {
+                    Destroy(itemInSlot.gameObject);
+                    Debug.Log("USED LAST OF ITEM");
+                }
+                else
+                {
+                    itemInSlot.RefreshCount();
+                    Debug.Log("USED ITEM");
+                }
+            }
+            else
+            {
+                Debug.Log("Item in slot is not consumeable");
+            }
+
+
+
+        }
+        else
+        {
+            Debug.Log("Nothing was found in slot");
+        }
+
 
         return null;
     }

@@ -5,10 +5,11 @@ using UnityEngine;
 public class ShowInventory : MonoBehaviour
 {
     public GameObject MainInventory;
+    public GameObject Crosshair;
     void Update()
     {
         // if inventory is not up
-        if (Input.GetKeyDown(KeyCode.E) && !MainInventory.activeInHierarchy)
+        if (Input.GetKeyDown(KeyCode.I) && !MainInventory.activeInHierarchy)
         {
             // freeze time
             Time.timeScale = 0;
@@ -17,8 +18,9 @@ public class ShowInventory : MonoBehaviour
             Cursor.visible = true;
 
             MainInventory.SetActive(true);
+            Crosshair.SetActive(false);
         }
-        else if (Input.GetKeyDown(KeyCode.E) && MainInventory.activeInHierarchy)
+        else if (Input.GetKeyDown(KeyCode.I) && MainInventory.activeInHierarchy)
         {
             // resume time
             Time.timeScale = 1;
@@ -27,6 +29,8 @@ public class ShowInventory : MonoBehaviour
             Cursor.visible = false;
 
             MainInventory.SetActive(false);
+            Crosshair.SetActive(true);
+
         }
     }
 }

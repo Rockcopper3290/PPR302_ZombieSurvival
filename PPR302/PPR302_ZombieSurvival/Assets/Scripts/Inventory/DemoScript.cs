@@ -30,9 +30,17 @@ public class DemoScript : MonoBehaviour
         }
     }
 
+
+    // TODO: change it so that it uses item when selected and pressing f
     public void UseSelectedItem()
     {
         Item recevedItem = inventoryManager.GetSelectedItem(true);
+
+        //TODO: Check to see what tags the item has
+        //TODO: If its a food item then add the food value to player stats and update
+        //TODO: If its a water item then add the food value to player stats and update
+
+
         if (recevedItem != null)
         {
             Debug.Log("Receved Item: " + recevedItem);

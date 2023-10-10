@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     bool readyToJump = true;
 
     public float staminaUsagePerJump = 15f;
+    public float staminaUsagePerSecondSprinting = 1f;
 
     [Header("Movement Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -99,9 +100,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void StateHandler()
     {
+
         // Mode - Sprinting
-        if (grounded && Input.GetKey(sprintKey))
+        if (grounded && Input.GetKey(sprintKey) && playerStats.currentStamina >= 0)
         {
+            playerStats.UseStamina_Jumping(staminaUsagePerSecondSprinting);
             state = MovementState.sprinting;
             moveSpeed = sprintSpeed;
         }
@@ -150,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        playerStats.UseStamina(staminaUsagePerJump);
+        playerStats.UseStamina_Jumping(staminaUsagePerJump);
 
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
