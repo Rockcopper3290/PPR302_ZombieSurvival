@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public PlayerStats playerStats;
+
     [Header("Movement Values")]
-    public float moveSpeed;
+    private float moveSpeed;
+    public float walkSpeed;
+    public float sprintSpeed;
+
+
 
     public float groundDrag;
 
@@ -14,8 +20,11 @@ public class PlayerMovement : MonoBehaviour
     public float airMultiplier;
     bool readyToJump = true;
 
+    public float staminaUsagePerJump = 15f;
+
     [Header("Movement Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode sprintKey = KeyCode.LeftShift;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -32,6 +41,14 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    public MovementState state;
+    public enum MovementState
+    {
+        walking,
+        sprinting, 
+        air
+    }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -46,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
         MyInput();
         SpeedLimiter();
+        StateHandler();
 
         //handle drag
         if (grounded)
@@ -65,7 +83,10 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         //when to jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        if(Input.GetKey(jumpKey) && 
+            readyToJump && 
+            grounded && 
+            playerStats.currentStamina - staminaUsagePerJump >= 0)
         {
             readyToJump = false;
 
@@ -73,6 +94,30 @@ public class PlayerMovement : MonoBehaviour
 
             //will wait the time of cooldown to allow for another jump
             Invoke(nameof(ResetJump), jumpCooldown);
+        }
+    }
+
+    private void StateHandler()
+    {
+        // Mode - Sprinting
+        if (grounded && Input.GetKey(sprintKey))
+        {
+            state = MovementState.sprinting;
+            moveSpeed = sprintSpeed;
+        }
+
+        // Mode - Walking
+        else if (grounded)
+        {
+            state = MovementState.walking;
+            moveSpeed = walkSpeed;
+        }
+
+        // Mode - Air
+        else
+        {
+            state = MovementState.air;
+
         }
     }
 
@@ -105,6 +150,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        playerStats.UseStamina(staminaUsagePerJump);
+
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 

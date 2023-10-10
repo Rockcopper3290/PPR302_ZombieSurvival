@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public int maxStackedItems;
+    public int maxStackedItems = 4;
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
 
@@ -48,8 +48,8 @@ public class InventoryManager : MonoBehaviour
             DraggableItem itemInSlot = slot.GetComponentInChildren<DraggableItem>();
             if (itemInSlot != null && 
                 itemInSlot.item == item &&
-                itemInSlot.count < maxStackedItems &&
-                itemInSlot.item.stackable)
+                itemInSlot.item.stackable == true &&
+                itemInSlot.count < item.amountOfItemsPerStack)
             {
                 itemInSlot.count++;
                 itemInSlot.RefreshCount();
@@ -79,12 +79,26 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-    public Item GetSelectedItem()
+    public Item GetSelectedItem(bool use)
     {
         InventorySlot slot = inventorySlots[selectedSlot];
         DraggableItem itemInSlot = slot.GetComponentInChildren<DraggableItem>();
         if (itemInSlot != null){
-            return itemInSlot.item;
+            Item item = itemInSlot.item;
+            if (use)
+            {
+                itemInSlot.count--;
+                if (itemInSlot.count <= 0)
+                {
+                    Destroy(itemInSlot.gameObject);
+                }
+                else
+                {
+                    itemInSlot.RefreshCount();
+                }
+            }
+
+            return item;
         }
 
         return null;
