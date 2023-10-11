@@ -7,6 +7,19 @@ public class DemoScript : MonoBehaviour
     public InventoryManager inventoryManager;
     public Item[] itemsToPickUp;
 
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player in range");
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                PickupItem(0);
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
     public void PickupItem(int id)
     {
         bool result = inventoryManager.AddItem(itemsToPickUp[id]);
