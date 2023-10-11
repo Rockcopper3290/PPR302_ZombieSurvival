@@ -76,7 +76,6 @@ public class PlayerStats : MonoBehaviour
         //return (currentValue, maxValue, targetSlider);
     }
 
-
     public void AddToPlayerStats_Food(float restoreAmount)
     {
         
@@ -155,6 +154,11 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void PlayerTakingDamage(float damage)
+    {
+        currentHealth -= damage * Time.deltaTime;
+        healthBar.value = currentHealth;
+    }
 
     // Coroutines --------------------------------------------------------------------------------------
     private IEnumerator RegainStaminia()
