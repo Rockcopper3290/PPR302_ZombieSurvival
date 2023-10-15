@@ -6,7 +6,10 @@ public class DemoScript : MonoBehaviour
 {
     public InventoryManager inventoryManager;
     public Item[] itemsToPickUp;
+    public Pickup pickup;
 
+    // this chunk of code is redundent now -> replaced by Pickup.cs
+    /*
     public void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -18,6 +21,25 @@ public class DemoScript : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+    }
+    */
+
+    private void Update()
+    {
+
+    }
+
+
+
+
+    public void OnCollisionStay(Collision other)
+    {
+            Debug.Log("Player in range");
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                PickupItem(0);
+                Destroy(this.gameObject);
+            }
     }
 
     public void PickupItem(int id)

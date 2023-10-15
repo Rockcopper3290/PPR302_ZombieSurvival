@@ -15,10 +15,10 @@ TagManager:
   - UI
   - whatIsPlayer
   - whatIsZombie
-  - 
+  - whatIsItem
   - whatIsWall
   - whatIsGround
-  - 
+  - Pickable
   - 
   - 
   - 

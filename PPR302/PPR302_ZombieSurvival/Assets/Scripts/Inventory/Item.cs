@@ -6,11 +6,6 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu (menuName = "Scriptable object/Item")]
 public class Item : ScriptableObject {
 
-    //public TileBase tile;
-    
-    
-
-
     [Header("Only gameplay")]
     public ItemType type;
     public ActionType actionType;
@@ -24,6 +19,9 @@ public class Item : ScriptableObject {
 
     [Header("Both")]
     public Sprite image;
+
+    [Header("Prefab Connection")]
+    public GameObject prefabedItem;
 
 }
 

@@ -30,7 +30,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             UseSelectedItem();
         }
