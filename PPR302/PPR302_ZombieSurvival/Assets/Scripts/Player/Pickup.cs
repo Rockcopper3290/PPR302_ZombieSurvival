@@ -60,9 +60,18 @@ public class Pickup : MonoBehaviour
             {
                 demoScript.PickupItem(0);
                 Destroy(itemOnGround);
+                ResetRaycast();
             }
             // END IF
         }
     }
 
+    public void ResetRaycast()
+    {
+        hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
+        pickUpUI.SetActive(false);
+
+        demoScript = null;
+        itemOnGround = null;
+    }
 }

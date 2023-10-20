@@ -6,7 +6,6 @@ public class DemoScript : MonoBehaviour
 {
     public InventoryManager inventoryManager;
     public Item[] itemsToPickUp;
-    public Pickup pickup;
 
     // this chunk of code is redundent now -> replaced by Pickup.cs
     /*
