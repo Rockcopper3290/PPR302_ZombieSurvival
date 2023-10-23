@@ -30,6 +30,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
+        // on right click
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             UseSelectedItem();
@@ -86,6 +87,16 @@ public class InventoryManager : MonoBehaviour
         inventoryItem.InitialiseItem(item); 
     }
 
+    public int GetStackAmount()
+    {
+        InventorySlot slot = inventorySlots[selectedSlot];
+        DraggableItem itemInSlot = slot.GetComponentInChildren<DraggableItem>();
+        if (itemInSlot != null)
+        {
+            return (itemInSlot.count);
+        }
+        return (0);
+    }
 
     public Item GetSelectedItem(bool use)
     {

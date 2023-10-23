@@ -17,5 +17,5 @@ MonoBehaviour:
   restoreValue: 30
   stackable: 1
   amountOfItemsPerStack: 4
-  image: {fileID: 21300000, guid: 4fddb881dc56a42cda0912425a4fec0b, type: 3}
+  image: {fileID: 21300000, guid: 55e0e22f05b85e542b4811070fbcccd1, type: 3}
   prefabedItem: {fileID: 5958122290278042801, guid: 89de359ece7fea243b33c6e865a3ce1f, type: 3}
