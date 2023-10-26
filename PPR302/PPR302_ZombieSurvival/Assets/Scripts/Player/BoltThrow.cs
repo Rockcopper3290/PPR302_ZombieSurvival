@@ -51,7 +51,9 @@ public class BoltThrow : MonoBehaviour
         readyToThrow = false;
 
         //instantate object to throw
+        
         GameObject projectile = Instantiate(objectToThrow, attackPoint.position, cam.rotation);
+        //projectile.GetComponent<InventoryManager>() = inventoryManager;
 
         //get rigidbody component
         Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();

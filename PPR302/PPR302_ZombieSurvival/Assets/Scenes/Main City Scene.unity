@@ -1909,8 +1909,8 @@ Transform:
   m_Children:
   - {fileID: 1462851487}
   - {fileID: 780569896}
-  - {fileID: 1049046596}
   - {fileID: 430962343}
+  - {fileID: 1049046596}
   - {fileID: 1629147152}
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -9248,16 +9248,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5958122290278042795, guid: 89de359ece7fea243b33c6e865a3ce1f, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.29999998
-      objectReference: {fileID: 0}
-    - target: {fileID: 5958122290278042795, guid: 89de359ece7fea243b33c6e865a3ce1f, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.29999998
-      objectReference: {fileID: 0}
-    - target: {fileID: 5958122290278042795, guid: 89de359ece7fea243b33c6e865a3ce1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.148
+      value: 10.598
       objectReference: {fileID: 0}
     - target: {fileID: 5958122290278042795, guid: 89de359ece7fea243b33c6e865a3ce1f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9299,16 +9291,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canned Beans (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 5958122290278042801, guid: 89de359ece7fea243b33c6e865a3ce1f, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 5958122290278042806, guid: 89de359ece7fea243b33c6e865a3ce1f, type: 3}
       propertyPath: inventoryManager
       value: 
       objectReference: {fileID: 1052333269}
-    m_RemovedComponents:
-    - {fileID: 2255089542771235300, guid: 89de359ece7fea243b33c6e865a3ce1f, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89de359ece7fea243b33c6e865a3ce1f, type: 3}
 --- !u!4 &780569896 stripped
 Transform:
@@ -10598,7 +10585,7 @@ PrefabInstance:
       objectReference: {fileID: 1052333269}
     - target: {fileID: 6892257147474924607, guid: 8dccbbb9e7b6fbc4887bea78bb6e62ec, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6892257147474924607, guid: 8dccbbb9e7b6fbc4887bea78bb6e62ec, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28466,7 +28453,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5958122290278042795, guid: 89de359ece7fea243b33c6e865a3ce1f, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5958122290278042795, guid: 89de359ece7fea243b33c6e865a3ce1f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28516,8 +28503,7 @@ PrefabInstance:
       propertyPath: inventoryManager
       value: 
       objectReference: {fileID: 1052333269}
-    m_RemovedComponents:
-    - {fileID: 2255089542771235300, guid: 89de359ece7fea243b33c6e865a3ce1f, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89de359ece7fea243b33c6e865a3ce1f, type: 3}
 --- !u!1001 &2147171057
 PrefabInstance:

@@ -58,6 +58,11 @@ public class Pickup : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.F))
             {
+                Debug.Log(demoScript);
+                Debug.Log(itemOnGround);
+
+
+                Debug.Log("F was pressed");
                 demoScript.PickupItem(0);
                 Destroy(itemOnGround);
                 ResetRaycast();
