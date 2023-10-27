@@ -53,8 +53,10 @@ public class BoltThrow : MonoBehaviour
         //instantate object to throw
         
         GameObject projectile = Instantiate(objectToThrow, attackPoint.position, cam.rotation);
-        //projectile.GetComponent<InventoryManager>() = inventoryManager;
 
+        // this sets the inventory manager as to allow the player the ability to pick up a thrown object
+        projectile.GetComponent<DemoScript>().inventoryManager = inventoryManager;
+        
         //get rigidbody component
         Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
 

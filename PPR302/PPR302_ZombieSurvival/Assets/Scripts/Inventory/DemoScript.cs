@@ -6,7 +6,7 @@ public class DemoScript : MonoBehaviour
 {
     public InventoryManager inventoryManager;
     public Item[] itemsToPickUp;
-
+    
     // this chunk of code is redundent now -> replaced by Pickup.cs
     /*
     public void OnTriggerStay(Collider other)
