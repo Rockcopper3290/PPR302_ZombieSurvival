@@ -38,6 +38,10 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
+    [Header("Anomaly References")]
+    public GameObject whirlpool;
+    public GameObject normalGameobjectParent;
+
     Vector3 moveDirection;
 
     Rigidbody rb;
@@ -138,7 +142,6 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
     }
 
-
     private void SpeedLimiter()
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -150,7 +153,6 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
-
     private void Jump()
     {
         playerStats.UseStamina_Jumping(staminaUsagePerJump);
@@ -163,5 +165,30 @@ public class PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Whirlpool"))
+        {
+            whirlpool = collision.gameObject;
+            //set the parent of the player to the crusher Anomaly
+            transform.parent = whirlpool.transform.parent;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Whirlpool"))
+        {
+            playerStats.PlayerTakingDamage(25f);
+        }
+    }
+
+    private void OnTriggerExit(Collider collision)
+    {
+        whirlpool = null;
+        //set the parent of the player to the crusher Anomaly
+        transform.parent = normalGameobjectParent.transform.parent;
     }
 }

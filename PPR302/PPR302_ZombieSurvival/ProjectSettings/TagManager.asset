@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Burner Anomaly
   - Gravity Anomaly
+  - Whirlpool
   layers:
   - Default
   - TransparentFX

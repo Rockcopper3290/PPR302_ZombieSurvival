@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Demo Scene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/Main Menu.unity
+    guid: 45504bd459643f84886ea712a639dd5b
+  - enabled: 1
+    path: Assets/Scenes/Main City Scene.unity
+    guid: 1cae2716864cd2e4a967ace190a3c125
+  - enabled: 1
+    path: Assets/Scenes/You Died.unity
+    guid: 7ee2721b32c879844b0a735bde04293d
   m_configObjects: {}

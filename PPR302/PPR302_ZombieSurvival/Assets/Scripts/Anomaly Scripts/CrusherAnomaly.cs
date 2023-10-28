@@ -2,61 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//this anomaly script is used for the whirlpool/black hole anomalies.
+// I call it the crusher anomaly cause it causes a crushing effect on the player
 public class CrusherAnomaly : MonoBehaviour
 {
-    [Header("Refrences")]
-    public GameObject playerObject;
-    public PlayerMovement playerMovement;
-    public PlayerStats playerStats;
 
-    //[Header("Variables")]
 
-    private void OnTriggerEnter(Collider collidedAnomaly)
+    [Header("Variables")]
+    public float rotateSpeed;
+
+    void Update()
     {
-        if (collidedAnomaly.gameObject.CompareTag("Crusher Anomaly"))
-        {
-            Debug.Log("Hit the crusher anomaly");
-
-            CalculateDistance();
-
-
-        }
+        //this will deturmin the speed in which the anomaly rotates
+        transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime);
     }
 
+    public PlayerStats playerStats;
 
     private void OnTriggerStay(Collider collidedAnomaly)
     {
-        if (collidedAnomaly.gameObject.CompareTag("Burner Anomaly"))
+        if (collidedAnomaly.gameObject.CompareTag("Player"))
         {
-            playerStats.PlayerTakingDamage(20f);
+            playerStats.PlayerTakingDamage(25f);
 
         }
     }
 
-    void CalculateDistance()
-    {
-        // Calculate distance between enemy and player
-        //IMPORTANT
-        //Vector3 distanceFromPlayer = Vector3.Distance(transform.position, playerObject.transform.position);
-        //Debug.Log("Distance = " + distance);
-    }
-
-    private Vector3 CalculateDirection()
-    {
-        // Calculate direction from enemy to player in degrees
-        Vector3 directionVector = (playerObject.transform.position - transform.position).normalized;
-        float direction = Mathf.Atan2(directionVector.x, directionVector.z) * Mathf.Rad2Deg;
-        return directionVector;
-        //Debug.Log("Direction = " + direction);
-    }
-
-    void MovePlayerTowardAnomaly()
-    {
-        float tempMovespeed = 1f;
-        // Move the enemy towards the player
-        
-        //IMPORTANT
-        //playerObject.transform.Translate(CalculateDirection(), tempMovespeed * Time.deltaTime);
-
-    }
 }

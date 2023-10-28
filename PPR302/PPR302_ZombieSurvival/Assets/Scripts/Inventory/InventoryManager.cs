@@ -25,7 +25,7 @@ public class InventoryManager : MonoBehaviour
             //check if key is a number
             bool isNumber = int.TryParse(Input.inputString, out int number);
             // check if number is between our range
-            if (isNumber && number > 0 && number < 8){
+            if (isNumber && number > 0 && number < 5){
                 ChangeSelectedSlot(number - 1);
             }
         }
