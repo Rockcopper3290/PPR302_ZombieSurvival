@@ -19,6 +19,15 @@ public class CrusherAnomaly : MonoBehaviour
 
     public PlayerStats playerStats;
 
+    private void OnTriggerEnter(Collider collidedItem)
+    {
+        // If an item enters an anomaly it'll destory the item
+        if (collidedItem.gameObject.CompareTag("Is Item"))
+        {
+            Destroy(collidedItem.gameObject);
+        }
+    }
+
     private void OnTriggerStay(Collider collidedAnomaly)
     {
         if (collidedAnomaly.gameObject.CompareTag("Player"))

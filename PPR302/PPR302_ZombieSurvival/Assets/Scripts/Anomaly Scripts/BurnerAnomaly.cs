@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class BurnerAnomaly : MonoBehaviour
 {
-    public PlayerMovement playerMovement;
     public PlayerStats playerStats;
 
-    private void OnTriggerEnter(Collider collidedAnomaly)
+    private void OnTriggerEnter(Collider collidedItem)
     {
-        if (collidedAnomaly.gameObject.CompareTag("Burner Anomaly"))
+        // If an item enters an anomaly it'll destory the item
+        if (collidedItem.gameObject.CompareTag("Is Item"))
         {
-            Debug.Log("Hit the burner anomaly");
-
+            Destroy(collidedItem.gameObject);
         }
     }
 
-    private void OnTriggerStay(Collider collidedAnomaly)
+    private void OnTriggerStay(Collider collidedWithAnomaly)
     {
-        if (collidedAnomaly.gameObject.CompareTag("Burner Anomaly"))
+        if (collidedWithAnomaly.gameObject.CompareTag("Player"))
         {
-            playerStats.PlayerTakingDamage(15f);
+            playerStats.PlayerTakingDamage(30f);
 
         }
     }
