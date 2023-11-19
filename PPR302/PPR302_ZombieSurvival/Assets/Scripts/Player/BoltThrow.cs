@@ -16,7 +16,7 @@ public class BoltThrow : MonoBehaviour
     public float throwCooldown;
 
     [Header("Throwing")]
-    public KeyCode throwKey = KeyCode.L;
+    public KeyCode throwKey = KeyCode.G;
     public float throwForce;
     public float throwUpwardForce;
 
