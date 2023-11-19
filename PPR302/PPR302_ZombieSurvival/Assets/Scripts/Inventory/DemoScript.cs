@@ -23,9 +23,9 @@ public class DemoScript : MonoBehaviour
     }
     */
 
-    private void Update()
+    private void Start()
     {
-
+        //inventoryManager = GameObject.Find("Inventory Manager").;
     }
 
 
@@ -65,7 +65,6 @@ public class DemoScript : MonoBehaviour
     }
 
 
-    // TODO: change it so that it uses item when selected and pressing f
     public void UseSelectedItem()
     {
         Item recevedItem = inventoryManager.GetSelectedItem(true);

@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class BoltThrow : MonoBehaviour
 {
-
-    //TODO: Get refrences to what the player has selected
-
-
     [Header("References")]
     public Transform cam;
     public Transform attackPoint;
@@ -20,7 +16,7 @@ public class BoltThrow : MonoBehaviour
     public float throwCooldown;
 
     [Header("Throwing")]
-    public KeyCode throwKey = KeyCode.Mouse0;
+    public KeyCode throwKey = KeyCode.G;
     public float throwForce;
     public float throwUpwardForce;
 
@@ -34,7 +30,7 @@ public class BoltThrow : MonoBehaviour
     public void Update()
     {
         int itemCount = inventoryManager.GetStackAmount();
-        if (Input.GetKeyDown(throwKey) && readyToThrow && itemCount > 0)
+        if (Input.GetKeyDown(throwKey) && readyToThrow && itemCount > 0 && Time.timeScale != 0)
         {
             //gets current item
             currentItem = inventoryManager.GetSelectedItem(false);
