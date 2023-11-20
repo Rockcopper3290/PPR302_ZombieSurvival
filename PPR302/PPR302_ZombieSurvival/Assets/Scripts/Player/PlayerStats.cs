@@ -150,6 +150,7 @@ public class PlayerStats : MonoBehaviour
         }
         else
         {
+            
             Debug.Log("Not Enough stamina");
         }
     }

@@ -104,9 +104,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void StateHandler()
     {
-
+        if (grounded && Input.GetKey(sprintKey) && playerStats.currentStamina <= 0.5)
+        {
+            playerStats.UseStamina_Jumping(staminaUsagePerSecondSprinting);
+            state = MovementState.walking;
+            moveSpeed = walkSpeed;
+        }
         // Mode - Sprinting
-        if (grounded && Input.GetKey(sprintKey) && playerStats.currentStamina >= 0)
+        else if (grounded && Input.GetKey(sprintKey) && playerStats.currentStamina >= 0)
         {
             playerStats.UseStamina_Jumping(staminaUsagePerSecondSprinting);
             state = MovementState.sprinting;
