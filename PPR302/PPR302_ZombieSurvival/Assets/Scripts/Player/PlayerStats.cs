@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Player stats")]
     public float maxHealth = 100f;
+    private Coroutine HealthOverTime_CR;
     [HideInInspector] public float currentHealth;
     [HideInInspector] private float HealthUsagePerSecond_Starving_Or_Dehydrated = 2f;
     [HideInInspector] private float HealthUsagePerSecond_Starving_AND_Dehydrated = 5f;
@@ -61,12 +62,14 @@ public class PlayerStats : MonoBehaviour
         waterBar.maxValue = maxWater;
         waterBar.value = maxWater;
 
+        HealthOverTime_CR = StartCoroutine(HealthOverTime());
         LoseFoodOverTime_CR = StartCoroutine(LoseFoodOverTime());
         LoseWaterOverTime_CR = StartCoroutine(LoseWaterOverTime());
 
 
-        //SetSliderValues(this.currentStamina, this.maxStamina, staminaBar);
-    }
+    
+
+}
 
     public void SetSliderValues(float currentValue, float maxValue, Slider targetSlider)
     {
@@ -143,7 +146,6 @@ public class PlayerStats : MonoBehaviour
             if (Regen_Staminia != null) 
             { 
             StopCoroutine(Regen_Staminia);
-            //StopCoroutine(LoseFoodOverTime_CR); 
             }
 
             Regen_Staminia = StartCoroutine(RegainStaminia());
@@ -183,7 +185,7 @@ public class PlayerStats : MonoBehaviour
         while (currentFood > 0f) //&& playerMovement.state == PlayerMovement.MovementState.walking
         {
             
-            currentFood -= 5f * Time.deltaTime;
+            currentFood -= 4f * Time.deltaTime;
             foodBar.value = currentFood;
             yield return regenTick;
         }
@@ -198,11 +200,42 @@ public class PlayerStats : MonoBehaviour
         while (currentWater > 0f)
         {
 
-            currentWater -= 5f * Time.deltaTime;
+            currentWater -= 4f * Time.deltaTime;
             waterBar.value = currentWater;
             yield return regenTick;
         }
         LoseWaterOverTime_CR = null;
+    }
+
+    private IEnumerator HealthOverTime()
+    {
+        yield return new WaitForSeconds(2f);
+
+        //while player is walking and has food stores
+        while (currentFood > 0f && currentWater > 0f) // if the player is fine on stats regain health slowly
+        {
+            while (currentFood < 30f || currentWater < 30f) // if the player has one Stat below 30%, Reduce health by a small amount
+            {
+                while (currentFood < 30f && currentWater < 30f) //If both stats are below 30%, Reduce health by a large amount
+                {
+                    currentHealth -= 8f * Time.deltaTime;
+                    healthBar.value = currentHealth;
+                    yield return regenTick;
+                }
+
+                currentHealth -= 4f * Time.deltaTime;
+                healthBar.value = currentHealth;
+                yield return regenTick;
+            }
+
+            if (currentHealth >= 100)
+            {
+                currentHealth += 2f * Time.deltaTime;
+                healthBar.value = currentHealth;
+                yield return regenTick;
+            }
+        }
+        HealthOverTime_CR = null;
     }
 
 }
