@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PauseMenuScripts : MonoBehaviour
@@ -9,6 +10,10 @@ public class PauseMenuScripts : MonoBehaviour
     public GameObject ToolBarUI;
     public GameObject Crosshair;
     public GameObject PauseMenuUI;
+    public GameObject OptionsMenuUI;
+    public GameObject BloodOverlay;
+    public Image BloodOverlay_Image;
+
     public PlayerStats playerStats;
 
     // run code once
@@ -20,10 +25,21 @@ public class PauseMenuScripts : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+        //BloodOverlay_Image = GetComponent<Image>();
     }
 
     private void Update()
     {
+        //if (playerStats.currentHealth < 100)
+        //{
+        //    BloodOverlay.SetActive(true);
+        //}
+        //else
+        //{
+        //    BloodOverlay.SetActive(false);
+        //}
+
+
         if (SceneManager.sceneCount == 0)
         {
             //Do nothing as you are in the main start menu
@@ -32,7 +48,7 @@ public class PauseMenuScripts : MonoBehaviour
         {
 
             // if inventory is not up
-            if (Input.GetKeyDown(KeyCode.P) && !PauseMenuUI.activeInHierarchy)
+            if (Input.GetKeyDown(KeyCode.Escape) && !PauseMenuUI.activeInHierarchy && !OptionsMenuUI.activeInHierarchy)
             {
                 // freeze time
                 Time.timeScale = 0;
@@ -45,7 +61,7 @@ public class PauseMenuScripts : MonoBehaviour
                 Crosshair.SetActive(false);
                 PauseMenuUI.SetActive(true);
             }
-            else if (Input.GetKeyDown(KeyCode.P) && PauseMenuUI.activeInHierarchy)
+            else if (Input.GetKeyDown(KeyCode.Escape) && PauseMenuUI.activeInHierarchy)
             {
                 // resume time
                 Time.timeScale = 1;
@@ -75,6 +91,12 @@ public class PauseMenuScripts : MonoBehaviour
     public void play_Button()
     {
         SceneManager.LoadScene("Main City Scene");
+    }
+
+
+    public void MainMenu_Button()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 
     // Game Scene Stuff

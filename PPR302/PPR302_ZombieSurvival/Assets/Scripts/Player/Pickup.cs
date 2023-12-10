@@ -24,11 +24,6 @@ public class Pickup : MonoBehaviour
     public InventoryManager inventoryManager;
 
 
-    private void Start()
-    {
-
-    }
-
     // Every frame shoot out a raycast
     void Update()
     {
@@ -37,7 +32,7 @@ public class Pickup : MonoBehaviour
         // Resets old raycast
         if (hit.collider != null)
         {
-            hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
+            //hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
             pickUpUI.SetActive(false);
         }
 
@@ -51,6 +46,8 @@ public class Pickup : MonoBehaviour
         {
             hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
             pickUpUI.SetActive(true);
+
+            Debug.Log("F was pressed");
 
             //get info of the game object
             demoScript = hit.collider.gameObject.GetComponent<DemoScript>();
@@ -73,7 +70,7 @@ public class Pickup : MonoBehaviour
 
     public void ResetRaycast()
     {
-        hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
+        //hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
         pickUpUI.SetActive(false);
 
         demoScript = null;

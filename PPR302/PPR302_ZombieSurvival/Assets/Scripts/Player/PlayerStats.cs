@@ -15,26 +15,26 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Player stats")]
     public float maxHealth = 100f;
-    private Coroutine HealthOverTime_CR;
+    public Coroutine HealthOverTime_CR;
     [HideInInspector] public float currentHealth;
-    [HideInInspector] private float HealthUsagePerSecond_Starving_Or_Dehydrated = 2f;
-    [HideInInspector] private float HealthUsagePerSecond_Starving_AND_Dehydrated = 5f;
+    //[HideInInspector] private float HealthUsagePerSecond_Starving_Or_Dehydrated = 2f;
+    //[HideInInspector] private float HealthUsagePerSecond_Starving_AND_Dehydrated = 5f;
 
     public float maxStamina = 100f;
     [HideInInspector] public float currentStamina;
-    [HideInInspector] private float staminaUsagePerSecond = 2f;
+    //[HideInInspector] private float staminaUsagePerSecond = 2f;
     
 
 
     public float maxFood = 100f;
     private Coroutine LoseFoodOverTime_CR;
     [HideInInspector] public float currentFood;
-    [HideInInspector] private float foodUsagePerSecond = 1f;
+    [HideInInspector] private float foodUsagePerSecond = 2f;
 
     public float maxWater = 100f;
     private Coroutine LoseWaterOverTime_CR;
     [HideInInspector] public float currentWater;
-    [HideInInspector] private float waterUsagePerSecond = 1f;
+    [HideInInspector] private float waterUsagePerSecond = 2f;
 
     [Header("Coroutine infomation")]
     private Coroutine Regen_Staminia;
@@ -62,14 +62,16 @@ public class PlayerStats : MonoBehaviour
         waterBar.maxValue = maxWater;
         waterBar.value = maxWater;
 
-        HealthOverTime_CR = StartCoroutine(HealthOverTime());
-        LoseFoodOverTime_CR = StartCoroutine(LoseFoodOverTime());
-        LoseWaterOverTime_CR = StartCoroutine(LoseWaterOverTime());
+        //HealthOverTime_CR = StartCoroutine(HealthOverTime());
+        //LoseFoodOverTime_CR = StartCoroutine(LoseFoodOverTime());
+        //LoseWaterOverTime_CR = StartCoroutine(LoseWaterOverTime());
+
+        StartCoroutine(HealthOverTime());
+        StartCoroutine(LoseFoodOverTime());
+        StartCoroutine(LoseWaterOverTime());
 
 
-    
-
-}
+    }
 
     public void SetSliderValues(float currentValue, float maxValue, Slider targetSlider)
     {
@@ -91,10 +93,9 @@ public class PlayerStats : MonoBehaviour
         foodBar.value = currentFood;
 
         // if not null it means that were are already regaining staminia -> stop the current staminia regen and wait 2 seconds
-        if (LoseFoodOverTime_CR != null)
-            StopCoroutine(LoseFoodOverTime());
+        //StopCoroutine(LoseFoodOverTime());
 
-        LoseFoodOverTime_CR = StartCoroutine(LoseFoodOverTime());
+        //LoseFoodOverTime_CR = StartCoroutine(LoseFoodOverTime());
     }
 
     public void AddToPlayerStats_Water(float restoreAmount)
@@ -107,11 +108,23 @@ public class PlayerStats : MonoBehaviour
         foodBar.value = currentFood;
 
         // if not null it means that were are already regaining staminia -> stop the current staminia regen and wait 2 seconds
-        if (LoseWaterOverTime_CR != null)
-            StopCoroutine(LoseWaterOverTime());
+        //StopCoroutine(LoseWaterOverTime());
 
-        LoseWaterOverTime_CR = StartCoroutine(LoseWaterOverTime());
+        //LoseWaterOverTime_CR = StartCoroutine(LoseWaterOverTime());
     }
+
+    public void AddToPlayerStats_Heath(float restoreAmount)
+    {
+        currentHealth += restoreAmount;
+
+        if (currentHealth > 100f)
+            currentHealth = 100f;
+
+        healthBar.value = currentHealth;
+
+        
+    }
+
 
 
     public void UseStamina_Jumping(float amount)
@@ -152,16 +165,27 @@ public class PlayerStats : MonoBehaviour
         }
         else
         {
-            
             Debug.Log("Not Enough stamina");
         }
     }
 
     public void PlayerTakingDamage(float damage)
     {
+        
+
+
         currentHealth -= damage * Time.deltaTime;
         healthBar.value = currentHealth;
+        
+        if (HealthOverTime_CR != null)
+        {
+            StopCoroutine(HealthOverTime_CR);
+            Debug.Log("alls good");
+        }
+        HealthOverTime_CR = StartCoroutine(HealthOverTime());
+
     }
+
 
     // Coroutines --------------------------------------------------------------------------------------
     private IEnumerator RegainStaminia()
@@ -185,7 +209,7 @@ public class PlayerStats : MonoBehaviour
         while (currentFood > 0f) //&& playerMovement.state == PlayerMovement.MovementState.walking
         {
             
-            currentFood -= 4f * Time.deltaTime;
+            currentFood -= foodUsagePerSecond * Time.deltaTime;
             foodBar.value = currentFood;
             yield return regenTick;
         }
@@ -200,7 +224,7 @@ public class PlayerStats : MonoBehaviour
         while (currentWater > 0f)
         {
 
-            currentWater -= 4f * Time.deltaTime;
+            currentWater -= waterUsagePerSecond * Time.deltaTime;
             waterBar.value = currentWater;
             yield return regenTick;
         }
@@ -228,12 +252,18 @@ public class PlayerStats : MonoBehaviour
                 yield return regenTick;
             }
 
-            if (currentHealth >= 100)
+            if (currentHealth <100f && currentFood > 50f && currentWater > 50f)
             {
-                currentHealth += 2f * Time.deltaTime;
+                currentHealth += 10f * Time.deltaTime;
+                if (currentHealth >= 100f)
+                {
+                    currentHealth = 100f;
+                }
                 healthBar.value = currentHealth;
                 yield return regenTick;
             }
+
+            yield return regenTick;
         }
         HealthOverTime_CR = null;
     }

@@ -25,7 +25,7 @@ public class InventoryManager : MonoBehaviour
             //check if key is a number
             bool isNumber = int.TryParse(Input.inputString, out int number);
             // check if number is between our range
-            if (isNumber && number > 0 && number < 5){
+            if (isNumber && number > 0 && number < 6){
                 ChangeSelectedSlot(number - 1);
             }
         }
@@ -145,6 +145,8 @@ public class InventoryManager : MonoBehaviour
                         playerStats.AddToPlayerStats_Food(item.restoreValue);
                     else if (item.type == ItemType.Water)
                         playerStats.AddToPlayerStats_Water(item.restoreValue);
+                    else if (item.type == ItemType.Medical)
+                        playerStats.AddToPlayerStats_Heath(item.restoreValue);
                 }
                 else
                 {

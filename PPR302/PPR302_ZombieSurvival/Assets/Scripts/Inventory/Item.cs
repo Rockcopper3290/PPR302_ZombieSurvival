@@ -29,6 +29,7 @@ public enum ItemType
 {
     Food,
     Water,
+    Medical,
     Tool,
     Weapon,
     Misc

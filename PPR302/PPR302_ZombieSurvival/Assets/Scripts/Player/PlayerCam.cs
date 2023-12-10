@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCam : MonoBehaviour
 {
@@ -40,4 +41,20 @@ public class PlayerCam : MonoBehaviour
 
     }
 
+    // =============================================================================================================
+
+    // these functions, upon hitting an apply button the volume of all sounds is reduced or inceased
+    [SerializeField] private Slider sensitivitySlider = null;
+
+    //[SerializeField] private TMPro volumeTextUI = null;
+
+
+    public void SaveAndApplySensButton()
+    {
+        // given as a decimal (0.4)
+        float sensValue = sensitivitySlider.value;
+
+        sensX = sensValue;
+        sensY = sensValue;
+    }
 }

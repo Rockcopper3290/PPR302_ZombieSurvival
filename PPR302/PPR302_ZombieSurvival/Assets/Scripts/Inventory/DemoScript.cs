@@ -33,12 +33,16 @@ public class DemoScript : MonoBehaviour
 
     public void OnCollisionStay(Collision other)
     {
-            Debug.Log("Player in range");
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                PickupItem(0);
-                Destroy(this.gameObject);
-            }
+        //Debug.Log("Player in range");
+        //Debug.Log(other.gameObject.name);
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log(other.gameObject.name);
+
+            PickupItem(0);
+            Destroy(this.gameObject);
+        }
     }
 
     public void PickupItem(int id)
@@ -69,9 +73,6 @@ public class DemoScript : MonoBehaviour
     {
         Item recevedItem = inventoryManager.GetSelectedItem(true);
 
-        //TODO: Check to see what tags the item has
-        //TODO: If its a food item then add the food value to player stats and update
-        //TODO: If its a water item then add the food value to player stats and update
 
 
         if (recevedItem != null)
